@@ -26,7 +26,7 @@ class QLearningPlayer(Player):
         self.alpha = alpha # learning rate
         self.gamma = gamma # discount factor
         self.last_move = None
-        self.last_board = ['-'] * n
+        self.last_board = ['-'] * n * n
 
     def getQ(self, state, action):
         if (state, action) not in self.q:

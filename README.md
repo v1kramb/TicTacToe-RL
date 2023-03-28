@@ -1,9 +1,2 @@
 # TicTacToe-RL
-Final project for CS 5824.
-
-## TODO
-- [x] Write vanilla Q learning algorithm for Tic Tac Toe
-- [ ] Apply action space compression technique
-- [ ] Benchmark 1 (osu!)
-- [ ] Benchmark 2 (VizDoom)
-- [ ] SARSA
+CS 5824 Final Project: Dynamic action space reduction for reinforcement learning in games

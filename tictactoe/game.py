@@ -52,9 +52,12 @@ class TicTacToe:
 
             move = player.move(self.board)
 
-            # Check for invalid move
+            # Check for invalid move for human player
             if move < 0 or move > ((self.n ** 2) - 1) or self.board[move] != '-':
                 player.reward(-1000, self.board)
+                break
+
+            self.board[move] = char
             
             # Game ends
             if self.win_test(char):
@@ -65,5 +68,4 @@ class TicTacToe:
                 player.reward(self.tie_reward, self.board)
                 other.reward(self.tie_reward, self.board)
 
-            # Switch turn
             self.p1_turn = not self.p1_turn
