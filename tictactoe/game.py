@@ -50,6 +50,7 @@ class TicTacToe:
             
             if player.breed == "Human": self.print_board()
 
+            # TODO: move logic is a little sus
             move = player.move(self.board)
 
             # Check for invalid move for human player
@@ -67,5 +68,6 @@ class TicTacToe:
             if self.board_filled():
                 player.reward(self.tie_reward, self.board)
                 other.reward(self.tie_reward, self.board)
+                break
 
             self.p1_turn = not self.p1_turn

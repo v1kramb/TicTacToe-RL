@@ -37,10 +37,9 @@ class QLearningPlayer(Player):
         self.last_board = tuple(board)
         actions = self.available_moves(board)
 
-        if random.random() < self.epsilon:
+        if random.random() < self.epsilon:  # epsilon-greedy
             self.last_move = random.choice(actions)
             return self.last_move
-
         qs = [self.getQ(self.last_board, a) for a in actions]
         maxQ = max(qs)
 
@@ -58,6 +57,6 @@ class QLearningPlayer(Player):
 
     def learn(self, state, action, reward, result_state):
         prev = self.getQ(state, action)
-        maxqnew = max([self.getQ(result_state, a) for a in self.available_moves(result_state)])
+        maxqnew = max([self.getQ(result_state, a) for a in self.available_moves(state)])
         self.q[(state, action)] = prev + self.alpha * ((reward + self.gamma*maxqnew) - prev) # traditional update rule
 
