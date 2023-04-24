@@ -2,13 +2,16 @@ import random
 from agent import *
 
 class TicTacToe:
-    """Game class, works for any NxN board."""
-    def __init__(self, n=3, p1=Player(), p2=Player(), tie_reward=0.2):
+    """Game class, works for any NxN board. P1 is always X, P2 is always O"""
+    def __init__(self, n=3, p1=Player(), p2=Player(), tie_reward=0.2, set_turn=False):
         self.n = n
         self.board = ['-'] * n * n
         self.p1, self.p2 = p1, p2
-        self.p1_turn = random.choice([True, False])
         self.tie_reward = tie_reward
+
+        self.p1_turn = True
+        if not set_turn:
+            self.p1_turn = random.choice([True, False])
 
         # Generate win_sets
         self.win_sets = []
@@ -42,6 +45,8 @@ class TicTacToe:
         return '-' not in self.board
 
     def run(self):
+        char = 'O'
+
         while True:
             # Set player
             player, char, other = self.p2, 'O', self.p1
@@ -50,10 +55,13 @@ class TicTacToe:
             
             if player.breed == "Human": self.print_board()
 
-            # TODO: move logic is a little sus
             move = player.move(self.board)
 
             # Check for invalid move for human player
+            if move == -0.5: # Special case for action space reduction method
+                char = 'T' # Prematurely end game as tie
+                break
+
             if move < 0 or move > ((self.n ** 2) - 1) or self.board[move] != '-':
                 player.reward(-1000, self.board)
                 break
@@ -68,6 +76,9 @@ class TicTacToe:
             if self.board_filled():
                 player.reward(self.tie_reward, self.board)
                 other.reward(self.tie_reward, self.board)
+                char = 'T'
                 break
 
             self.p1_turn = not self.p1_turn
+        
+        return char  # signifies winner
