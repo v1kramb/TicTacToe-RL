@@ -24,10 +24,18 @@ class TicTacToe:
 
     def print_board(self):
         print_list = [i for i in range(self.n - 1, self.n * self.n, self.n)]
+        print_list_idx = 0
 
         for idx, piece in enumerate(self.board):
             print(piece, end=" ")
-            if idx in print_list: print()
+            if idx == print_list[print_list_idx]:
+                indices = [] 
+                if print_list_idx == 0:
+                    indices = [str(i) for i in range(print_list[print_list_idx] + 1)]
+                else:
+                    indices = [str(i) for i in range(print_list[print_list_idx - 1] + 1, print_list[print_list_idx] + 1)]
+                print(" ".join(indices))
+                print_list_idx += 1
 
     def win_test(self, char):
         for win_set in self.win_sets:

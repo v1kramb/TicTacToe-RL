@@ -34,7 +34,12 @@ for i in range(1, NUM_EPISODES + 1):
     if winner2 == 'O':
         win_count2 += 1
     accumulated_wins2.append(win_count2)
-    
+
+# p5 = HumanPlayer()
+# game = TicTacToe(n=N, p1=p5, p2=p2, tie_reward=0.5, set_turn=True)
+# game.run()
+# game = TicTacToe(n=N, p1=p5, p2=p4, tie_reward=0.5, set_turn=True)
+# game.run()
 
 # Graph episodes
 x = [i for i in range(NUM_EPISODES)]
